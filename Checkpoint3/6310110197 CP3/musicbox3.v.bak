@@ -1,0 +1,144 @@
+module musicbox3(clk, spk1);
+input clk;
+output spk1;
+parameter inClk = 50000000; 	//reference clock
+parameter c4 = inClk/261/2; //Do4 261Hz
+parameter d4 = inClk/293/2; //Re4 293Hz
+parameter e4 = inClk/329/2; //Mi4 329Hz
+parameter f4 = inClk/349/2; //Fa4 349Hz
+parameter g4 = inClk/392/2; //Sol4 392Hz
+parameter a4 = inClk/440/2; //La4 440Hz
+parameter b4 = inClk/493/2; //Si4 493Hz
+parameter c5 = c4/2; //Do5 522Hz
+parameter d5 = d4/2; //Re5 586Hz
+parameter e5 = e4/2; //Mi5 658Hz
+parameter f5 = f4/2; //Fa5 698Hz
+parameter g5 = g4/2; //Sol5 784Hz
+parameter a5 = a4/2; //La5 880Hz
+parameter b5 = b4/2; //Si5 986Hz
+parameter stop = 0; //stop note
+parameter refreshT = inClk/60*10; //0.5 seconds
+// parameter refreshT = inClk/2;
+reg [26:0] clkRefresh, countUp;
+reg [16:0] counter;
+reg spk1;
+
+always @(posedge clk) begin
+  clkRefresh = clkRefresh + 1;
+  if(clkRefresh == refreshT) begin
+    if(countUp < 39) countUp = countUp + 1; else countUp = 0;
+    clkRefresh = 0;
+  end
+    if(counter == 0 && countUp < 2) counter <= g4-1;
+    else if(counter == 0 && countUp < 3) counter <= stop;
+    // else if(counter == 0 && countUp < 3) counter <= g4-1;
+    else if(counter == 0 && countUp < 5) counter <= g4-1;
+    else if(counter == 0 && countUp < 6) counter <= stop;
+    else if(counter == 0 && countUp < 8) counter <= e4-1;
+    else if(counter == 0 && countUp < 9) counter <= stop;
+    else if(counter == 0 && countUp < 11) counter <= g4-1;
+    else if(counter == 0 && countUp < 12) counter <= stop;
+    else if(counter == 0 && countUp < 14) counter <= a4-1;
+    else if(counter == 0 && countUp < 15) counter <= stop;
+    // else if(counter == 0 && countUp < 12) counter <= c5-1;
+    else if(counter == 0 && countUp < 19) counter <= c5-1;
+    else if(counter == 0 && countUp < 20) counter <= stop;
+    else if(counter == 0 && countUp < 22) counter <= d5-1;
+    else if(counter == 0 && countUp < 23) counter <= stop;
+    else if(counter == 0 && countUp < 25) counter <= c5-1;
+    else if(counter == 0 && countUp < 26) counter <= stop;
+    // else if(counter == 0 && countUp < 19) counter <= a4-1;
+    else if(counter == 0 && countUp < 30) counter <= a4-1;
+    else if(counter == 0 && countUp < 31) counter <= stop;
+    // else if(counter == 0 && countUp < 22) counter <= g4-1;
+    else if(counter == 0 && countUp < 35) counter <= g4-1;
+    else if(counter == 0 && countUp < 36) counter <= stop;
+    else if(counter == 0 && countUp < 38) counter <= e4-1;
+    else if(counter == 0 && countUp < 39) counter <= stop;
+
+    // else if(counter == 0 && countUp < 27) counter <= g4-1;
+    // else if(counter == 0 && countUp < 28) counter <= stop;
+    // else if(counter == 0 && countUp < 29) counter <= a4-1;
+    // else if(counter == 0 && countUp < 30) counter <= stop;
+    // else if(counter == 0 && countUp < 31) counter <= c5-1;
+    // else if(counter == 0 && countUp < 32) counter <= c5-1;
+    // else if(counter == 0 && countUp < 33) counter <= stop;
+    // else if(counter == 0 && countUp < 34) counter <= a4-1;
+    // else if(counter == 0 && countUp < 35) counter <= stop;
+    // // else if(counter == 0 && countUp < 36) counter <= c5-1;
+    // else if(counter == 0 && countUp < 37) counter <= c5-1;
+    // else if(counter == 0 && countUp < 38) counter <= stop;
+    // else if(counter == 0 && countUp < 39) counter <= g4-1;
+    // else if(counter == 0 && countUp < 40) counter <= stop;
+    // else if(counter == 0 && countUp < 41) counter <= a4-1;
+    // else if(counter == 0 && countUp < 42) counter <= stop;
+    // else if(counter == 0 && countUp < 43) counter <= c5-1;
+    // else if(counter == 0 && countUp < 44) counter <= stop;
+    // else if(counter == 0 && countUp < 45) counter <= d5-1;
+    // else if(counter == 0 && countUp < 46) counter <= stop;
+    // else if(counter == 0 && countUp < 47) counter <= c5-1;
+    // else if(counter == 0 && countUp < 48) counter <= stop;
+    // else if(counter == 0 && countUp < 49) counter <= a4-1;
+    // else if(counter == 0 && countUp < 50) counter <= stop;
+    // else if(counter == 0 && countUp < 51) counter <= g4-1;
+    // else if(counter == 0 && countUp < 52) counter <= stop;
+    // // else if(counter == 0 && countUp < 53) counter <= g4-1;
+    // else if(counter == 0 && countUp < 54) counter <= g4-1;
+    // else if(counter == 0 && countUp < 55) counter <= stop;
+    // else if(counter == 0 && countUp < 56) counter <= stop;
+
+    // else if(counter == 0 && countUp < 57) counter <= c5-1;
+    // else if(counter == 0 && countUp < 58) counter <= c5-1;
+    // else if(counter == 0 && countUp < 59) counter <= stop;
+    // else if(counter == 0 && countUp < 60) counter <= c5-1;
+    // else if(counter == 0 && countUp < 61) counter <= c5-1;
+    // else if(counter == 0 && countUp < 62) counter <= stop;
+    // else if(counter == 0 && countUp < 63) counter <= c5-1;
+    // else if(counter == 0 && countUp < 64) counter <= stop;
+    // else if(counter == 0 && countUp < 65) counter <= c5-1;
+    // else if(counter == 0 && countUp < 67) counter <= stop;
+
+    // else if(counter == 0 && countUp < 67) counter <= g4-1;
+    // else if(counter == 0 && countUp < 68) counter <= g4-1;
+    // else if(counter == 0 && countUp < 69) counter <= stop;
+    // else if(counter == 0 && countUp < 70) counter <= g4-1;
+    // else if(counter == 0 && countUp < 71) counter <= g4-1;
+    // else if(counter == 0 && countUp < 72) counter <= stop;
+    // else if(counter == 0 && countUp < 73) counter <= g4-1;
+    // else if(counter == 0 && countUp < 74) counter <= stop;
+    // else if(counter == 0 && countUp < 75) counter <= g4-1;
+    // else if(counter == 0 && countUp < 76) counter <= stop;
+    // else if(counter == 0 && countUp < 77) counter <= stop;
+    // else if(counter == 0 && countUp < 78) counter <= c5-1;
+    // else if(counter == 0 && countUp < 79) counter <= stop;
+    // else if(counter == 0 && countUp < 80) counter <= c5-1;
+    // else if(counter == 0 && countUp < 81) counter <= stop;
+    // else if(counter == 0 && countUp < 82) counter <= c5-1;
+    // else if(counter == 0 && countUp < 83) counter <= c5-1;
+    // else if(counter == 0 && countUp < 84) counter <= d5-1;
+    // else if(counter == 0 && countUp < 85) counter <= d5-1;
+    // else if(counter == 0 && countUp < 86) counter <= e5-1;
+    // else if(counter == 0 && countUp < 87) counter <= e5-1;
+    // else if(counter == 0 && countUp < 88) counter <= stop;
+    // else if(counter == 0 && countUp < 89) counter <= g5-1;
+    // else if(counter == 0 && countUp < 90) counter <= stop;
+    // else if(counter == 0 && countUp < 91) counter <= d5-1;
+    // else if(counter == 0 && countUp < 92) counter <= stop;
+    // else if(counter == 0 && countUp < 93) counter <= c5-1;
+    // else if(counter == 0 && countUp < 94) counter <= stop;
+    // else if(counter == 0 && countUp < 95) counter <= a4-1;
+    // else if(counter == 0 && countUp < 96) counter <= stop;
+    // else if(counter == 0 && countUp < 97) counter <= g4-1;
+    // else if(counter == 0 && countUp < 98) counter <= stop;
+    // else if(counter == 0 && countUp < 99) counter <= a4-1;
+    // else if(counter == 0 && countUp < 100) counter <= stop;
+    // else if(counter == 0 && countUp < 101) counter <= c5-1;
+    // else if(counter == 0 && countUp < 102) counter <= stop;
+    // else if(counter == 0 && countUp < 103) counter <= d5-1;
+    // else if(counter == 0 && countUp < 104) counter <= stop;
+    // else if(counter == 0 && countUp < 105) counter <= stop;
+    else if(counter != 0) counter <= counter-1;
+end
+
+always @(posedge clk) if(counter == 0) spk1 <= ~spk1;
+endmodule
